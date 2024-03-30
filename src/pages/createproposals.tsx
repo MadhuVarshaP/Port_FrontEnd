@@ -39,40 +39,36 @@ function createproposal()
     // Create a new Date object using the parsed values
     const date = `${year}-${month}-${day}T${hour}:${minute}:${second}`;
     console.log(date)
-    // Get the timestamp in ISO format
-    const timestamp = date.toLocaleString();
 
     return date;
 }
 
     const handleCreateProposal = async ()  => {
-      const timestamp = convertToTimestamp(date);
-      console.log(timestamp)
-      // const docRef = await addDoc(collection(db, "proposals"), {
-      //   name: name, 
-      //   pid: Pid,   
-      //   description: description,
-      //   acceptencePercentage: acceptencePercentage,
-      //   date: date,
-      // });
-      //   if (!contract) {
-      //     return toast.error("Contract not loaded");
-      //   }
+      const docRef = await addDoc(collection(db, "proposals"), {
+        name: name, 
+        pid: Pid,   
+        description: description,
+        acceptencePercentage: acceptencePercentage,
+        date: convertToTimestamp(date),
+      });
+        if (!contract) {
+          return toast.error("Contract not loaded");
+        }
     
-      //   if (walletBalance?.eq(0)) {
-      //     return toast.error(
-      //       "Your wallet does not have enough funds. Please click the 'Top-up Wallet' button in the top right corner, or use the local faucet.",
-      //     );
-      //   }
+        if (walletBalance?.eq(0)) {
+          return toast.error(
+            "Your wallet does not have enough funds. Please click the 'Top-up Wallet' button in the top right corner, or use the local faucet.",
+          );
+        }
     
-      //   await contract.contract?.functions.create_proposal(bn(acceptencePercentage),bn(Date.parse(date))).call();
-      //   const count = await contract.contract?.functions.proposal_count().get();
-      //   console.log(count,"count")
-      //   // setProposalCount(count);
+        await contract.contract?.functions.create_proposal(bn(acceptencePercentage),bn(Date.parse(convertToTimestamp(date)))).call();
+        const count = await contract.contract?.functions.proposal_count().get();
+        console.log(count,"count")
+        // setProposalCount(count);
     
-      //   await refreshWalletBalance?.();
-      //   toast.success("Sucessfully Created the proposal")
-      //   route.push('/proposals');
+        await refreshWalletBalance?.();
+        toast.success("Sucessfully Created the proposal")
+        route.push('/proposals');
     }
 
     const handleBack = () => {

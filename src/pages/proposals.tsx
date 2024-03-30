@@ -31,6 +31,10 @@ function Proposals() {
      
   }
 
+  const deposite = async () => {
+    await contract.contract?.functions.deposit().call()
+  }
+
   const fetchCount = async () => {
     if(contract){
     const { value } = await contract.contract?.functions.proposal_count().get() ?? {};
