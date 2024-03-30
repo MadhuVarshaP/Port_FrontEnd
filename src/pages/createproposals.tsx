@@ -1,5 +1,6 @@
 import { useActiveWallet } from '@/hooks/useActiveWallet';
 import { useContract } from '@/hooks/useContract';
+import { useAccount } from '@fuel-wallet/react';
 import { bn } from 'fuels';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react'
@@ -8,6 +9,7 @@ import { IoMdClose } from "react-icons/io";
 
 function createproposal()  
 {  
+  const { account } = useAccount();
   const { wallet, walletBalance, refreshWalletBalance } = useActiveWallet();
   const [name,setName] = useState('');
   const [description,setDescription] = useState("");
@@ -15,6 +17,7 @@ function createproposal()
   const [date,setDate] = useState("");
   let route = useRouter();
   const contract = useContract();
+
 
 
     const handleCreateProposal = async ()  => {

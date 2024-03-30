@@ -31,7 +31,7 @@ export default function Home() {
   }, [wallet]);
 
   const handleNext = () => {
-    router.push('/page');
+    router.push('/profile');
   }
   
 

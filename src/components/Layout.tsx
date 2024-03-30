@@ -64,7 +64,10 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
         <nav className="flex justify-between absolute w-full items-center p-4 bg-black text-white gap-6">
           <Link href="/">Home</Link>
 
-          <Link href="/faucet">Faucet</Link>
+          <Link href="/proposals">Proposals</Link>
+          <Link href="/events">Events</Link>
+          <Link href="/profilePage">Profile</Link>
+
 
           {isBrowserWalletConnected && (
             <Button onClick={disconnect}>Disconnect Wallet</Button>

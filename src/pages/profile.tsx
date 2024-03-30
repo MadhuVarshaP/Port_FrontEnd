@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 function Profile() {
   const [name,setName] = useState('');
@@ -9,6 +9,11 @@ function Profile() {
   const handleNext = () => {
     route.push('/fleet')
   }
+
+  useEffect(() => {
+    localStorage.setItem('name', name);
+    localStorage.setItem('email',email);
+}, [name,email]);
 
   return (
     <div className='flex flex-col justify-center items-center my-[40px]'>
