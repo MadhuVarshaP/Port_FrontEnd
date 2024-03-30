@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router';
 import { useAccount } from '@fuel-wallet/react';
+import img from '../images/Group (4).png'
+import img1 from '../images/Group (5).png'
+import img2 from '../images/Group (6).png'
+import Image from 'next/image';
 
 function Fleet() {
     const route = useRouter()
@@ -25,25 +29,32 @@ function Fleet() {
             <div className='grid grid-cols-3 gap-4 p-[20px]'>
               <div className={`rounded-md bg-[#EAF6F8] p-[10px] hover:shadow-lg flex flex-col justify-center items-center ${selectedFleet === 'Super Kings' ? 'bg-blue-200' : ''}`} onClick={() => handleFleetSelection('Super Kings')}> 
               <p>Super Kings</p>
+              <Image src={img} alt='' />
               <p className='text-gray-500'>Chennai</p>
               </div>
               <div className={`rounded-md bg-[#EAF6F8] p-[10px] hover:shadow-lg flex flex-col justify-center items-center ${selectedFleet === 'Royal Red' ? 'bg-blue-200' : ''}`} onClick={() => handleFleetSelection('Royal Red')}> 
               <p>Royal Red</p>
+              <Image src={img1} alt='' />
               <p className='text-gray-500'>Bangalore Fleet</p>
               </div>
               <div className={`rounded-md bg-[#EAF6F8] p-[10px] hover:shadow-lg flex flex-col justify-center items-center ${selectedFleet === 'Mumbai Fleet' ? 'bg-blue-200' : ''}`} onClick={() => handleFleetSelection('Mumbai Fleet')}>
+              <p>Mumbai Indians</p>
+              <Image src={img2} alt='' />
               <p className='text-gray-500'>Mumbai Fleet</p>
               </div>
               <div className={`rounded-md bg-[#EAF6F8] p-[10px] hover:shadow-lg flex flex-col justify-center items-center ${selectedFleet === 'Delhi Fleet' ? 'bg-blue-200' : ''}`} onClick={() => handleFleetSelection('Delhi Fleet')}> 
               <p>Devils</p>
+              <Image src={img} alt='' />
               <p className='text-gray-500'>Delhi Fleet</p>
               </div>
               <div className={`rounded-md bg-[#EAF6F8] p-[10px] hover:shadow-lg flex flex-col justify-center items-center ${selectedFleet === 'Indian Knights' ? 'bg-blue-200' : ''}`} onClick={() => handleFleetSelection('Indian Knights')}> 
               <p>Indian Knights</p>
+              <Image src={img1} alt='' />
               <p className='text-gray-500'>Mumbai Fleet</p>
               </div>
-              <div className={`rounded-md bg-[#EAF6F8] p-[10px] hover:shadow-lg flex flex-col justify-center items-center ${selectedFleet === '' ? 'bg-blue-200' : ''}`} onClick={() => handleFleetSelection('')}> 
+              <div className={`rounded-md bg-[#EAF6F8] p-[10px] hover:shadow-lg flex flex-col justify-center items-center ${selectedFleet === 'create' ? 'bg-blue-200' : 'create'}`} onClick={() => handleFleetSelection('')}> 
               <p>Create New Fleet</p>
+              <Image src={img2} alt='' />
               <p className='text-gray-500'>Fleet Name</p>
               </div>
             </div>

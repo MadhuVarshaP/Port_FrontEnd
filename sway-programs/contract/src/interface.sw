@@ -191,4 +191,7 @@ abi Info {
     /// * [u64] - the amount of proposals created.
     #[storage(read)]
     fn proposal_count() -> u64;
+
+     #[storage(read)]
+    fn event_count() -> u64;
 }

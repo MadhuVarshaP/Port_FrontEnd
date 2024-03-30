@@ -8,6 +8,7 @@ import { useBrowserWallet } from "@/hooks/useBrowserWallet";
 import { useActiveWallet } from "@/hooks/useActiveWallet";
 import { useFaucet } from "@/hooks/useFaucet";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   const { faucetWallet } = useFaucet();
@@ -20,6 +21,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
 
   const { connect } = useConnectUI();
   const { disconnect } = useDisconnect();
+  const router = useRouter();
 
   const { wallet, refreshWalletBalance, walletBalance } = useActiveWallet();
 
@@ -32,7 +34,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
       return toast.error("Faucet wallet not found.");
     }
 
-    const tx = await faucetWallet?.transfer(wallet.address, 10_000);
+    const tx = await faucetWallet?.transfer(wallet.address, 2_000_000_000);
     await tx?.waitForResult();
 
     toast.success("Wallet topped up!");
@@ -40,7 +42,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
     await refreshWalletBalance?.();
   };
 
-  const showTopUpButton = walletBalance?.lt(10_000);
+  const showTopUpButton = walletBalance?.lt(1_000_000_000);
 
   const showAddNetworkButton =
     browserWallet &&
@@ -53,6 +55,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
     );
   };
 
+
   return (
     <>
       <Head>
@@ -61,19 +64,28 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
       </Head>
       <Toaster />
       <div className="flex flex-col">
-        <nav className="flex justify-between absolute w-full items-center p-4 bg-black text-white gap-6">
-          <Link href="/">Home</Link>
+        <nav className="flex justify-between absolute w-full items-center p-4 px-12 bg-black text-white gap-6">
+        <Link href="/" className={router.pathname === '/' ? 'text-white bg-[#2DA2B5] px-4 py-2 rounded' : 'text-[#2DA2B5] px-4 py-2 rounded'}>   
+                    Home
+            </Link>
+            <Link href="/proposals" className={router.pathname === '/proposals' ? 'text-white bg-[#2DA2B5] px-4 py-2 rounded' : 'text-[#2DA2B5] px-4 py-2 rounded'}>
+                    Proposals
+            </Link>
+            <Link href="/events" className={router.pathname === '/events' ? 'text-white bg-[#2DA2B5] px-4 py-2 rounded' : 'text-[#2DA2B5] px-4 py-2 rounded'}>
+                    Events
+            </Link>
+            <Link href="/profilePage" className={router.pathname === '/profilePage' ? 'text-white bg-[#2DA2B5] px-4 py-2 rounded' : 'text-[#2DA2B5] px-4 py-2 rounded'}>
+                    Profile
+            </Link>
 
-          <Link href="/proposals">Proposals</Link>
-          <Link href="/events">Events</Link>
-          <Link href="/profilePage">Profile</Link>
+  
 
-
+          <div className="flex ml-auto space-x-2">
           {isBrowserWalletConnected && (
-            <Button onClick={disconnect}>Disconnect Wallet</Button>
+            <Button className="bg-[#2DA2B5]" onClick={disconnect}>Disconnect Wallet</Button>
           )}
           {!isBrowserWalletConnected && (
-            <Button onClick={connect}>Connect Wallet</Button>
+            <Button  className="bg-[#2DA2B5]" onClick={connect}>Connect Wallet</Button>
           )}
 
           {showAddNetworkButton && (
@@ -81,8 +93,6 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
               Wrong Network
             </Button>
           )}
-
-          <div className="ml-auto">
             <WalletDisplay />
           </div>
 

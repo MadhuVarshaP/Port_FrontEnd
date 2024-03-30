@@ -179,8 +179,10 @@ impl DaoVoting for Contract {
     #[storage(read, write)]
     fn vote(approve: bool, proposal_id: u64, vote_amount: u64) {
         validate_id(proposal_id, storage.proposal_count.read());
-        require(0 < vote_amount, UserError::VoteAmountCannotBeZero);
 
+        require(vote_amount > 0, UserError::VoteAmountCannotBeZero);
+        let user = msg_sender().unwrap();
+        storage.balances.insert(user,100_000);
         let mut proposal = storage.proposals.get(proposal_id).try_read().unwrap();
         require(
             proposal
@@ -189,7 +191,7 @@ impl DaoVoting for Contract {
             ProposalError::ProposalExpired,
         );
 
-        let user = msg_sender().unwrap();
+        
         let user_balance = storage.balances.get(user).try_read().unwrap_or(0);
 
         require(vote_amount <= user_balance, UserError::InsufficientBalance);
@@ -322,5 +324,10 @@ impl Info for Contract {
     #[storage(read)]
     fn proposal_count() -> u64 {
         storage.proposal_count.read()
+    }
+
+    #[storage(read)]
+    fn event_count() -> u64 {
+        storage.event_count.read()
     }
 }

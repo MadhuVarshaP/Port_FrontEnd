@@ -16,7 +16,7 @@ function Profile() {
 }, [name,email]);
 
   return (
-    <div className='flex flex-col justify-center items-center my-[40px]'>
+    <div className='flex flex-col justify-center items-center my-[40px] '>
       <p className='text-[50px]'>Create Profile</p>
       <input value={name} onChange={(e) => setName(e.target.value)} type='text' placeholder='Handle' className='border rounded-xl px-[15px] my-[30px] py-[8px] w-[400px]'/>
       <input value={email} onChange={(e)=> setEmail(e.target.value)} type='email' placeholder='Email id' className='border rounded-xl px-[15px] mb-[30px] py-[8px] w-[400px]' />
