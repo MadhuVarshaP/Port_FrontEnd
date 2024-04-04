@@ -31,6 +31,11 @@ npx fuels dev
 npm run dev
 ```
 
+## Demo Video
+
+https://www.youtube.com/watch?v=_Jj04H9-JjU
+
+
 ## Learn More
 
 - [Fuel TS SDK docs](https://fuellabs.github.io/fuels-ts/)
